@@ -31,7 +31,7 @@ $(document).ready(function () {
                     
                     <td>${res['name']}</td>
 
-                       <td><img src="https://django-apii.herokuapp.com/${res['image']}" class="img-fluid" height=100px width=100px /></td>
+                       <td><img src="https://django-apii.herokuapp.com${res['image']}" class="img-fluid" height=100px width=100px /></td>
                        <td>${res['description']}</td>
                        <td><input type='button' value='🗑️' data-pid="${res['project_id']}" class="pbtndelete" />
                       <input type='button' value='Edit' data-pid="${res['project_id']}" id="btaccess" data-bs-target="#Mymodel1" onclick="fun()" data-bs-toggle="modal" data-status= class="pbtnedit" />

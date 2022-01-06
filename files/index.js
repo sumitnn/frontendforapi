@@ -16,7 +16,7 @@ $(document).ready(function () {
                 $.each(res, function (index, value) {
                     output += `<div class="col-md-3 mb-4" id="textbody"  >
                     <div class="card" style="width: 20rem;">
-                    <img src= "https://django-apii.herokuapp.com/${value.image}" class="card-img-top img-fluid" alt="image" height=500px >
+                    <img src= "https://django-apii.herokuapp.com${value.image}" class="card-img-top img-fluid" alt="image" height=500px >
                     <div class="card-body">
                     <h5 class="card-title">${value.name}</h5>
                     <p class="card-text">${value.description}</p> 
