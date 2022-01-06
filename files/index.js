@@ -10,13 +10,13 @@ $(document).ready(function () {
         output = '';
         $.ajax({
             type: 'GET',
-            url: "http://localhost:8000/api/projects/",
+            url: "https://django-apii.herokuapp.com/api/projects/",
             success: function (res) {
 
                 $.each(res, function (index, value) {
                     output += `<div class="col-md-3 mb-4" id="textbody"  >
                     <div class="card" style="width: 20rem;">
-                    <img src=${"http://localhost:8000" + value.image} class="card-img-top img-fluid" alt="image" height=500px >
+                    <img src=${value.image} class="card-img-top img-fluid" alt="image" height=500px >
                     <div class="card-body">
                     <h5 class="card-title">${value.name}</h5>
                     <p class="card-text">${value.description}</p> 
@@ -36,7 +36,7 @@ $(document).ready(function () {
         output1 = '';
         $.ajax({
             type: 'GET',
-            url: "http://localhost:8000/api/task/",
+            url: "https://django-apii.herokuapp.com/api/task/",
             success: function (res) {
 
                 $.each(res, function (index, value) {
@@ -63,7 +63,7 @@ $(document).ready(function () {
         console.log(formData);
         console.log(formData.image);
         $.ajax({
-            url: "http://localhost:8000/api/projects/",
+            url: "https://django-apii.herokuapp.com/api/projects/",
             type: 'POST',
             data: formData,
             cache: false,
@@ -107,7 +107,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            url: "http://localhost:8000/api/task/",
+            url: "https://django-apii.herokuapp.com/api/task/",
             type: 'POST',
             dataType: "json",
             data: datad,
@@ -134,7 +134,7 @@ $(document).ready(function () {
         console.log(s);
 
         $.ajax({
-            url: `http://localhost:8000/api/task/${s}`,
+            url: `https://django-apii.herokuapp.com/api/task/${s}`,
             type: "DELETE",
             success: function (res) {
                 alert("delete");
@@ -151,7 +151,7 @@ $(document).ready(function () {
         let output = "";
         $.ajax({
             type: 'GET',
-            url: `http://localhost:8000/api/task/${id}`,
+            url: `https://django-apii.herokuapp.com/api/task/${id}`,
             success: function (res) {
                 console.log(res);
                 output += `
@@ -220,7 +220,7 @@ function myfun() {
 
 
     $.ajax({
-        url: `http://localhost:8000/api/task/${id}`,
+        url: `https://django-apii.herokuapp.com/api/task/${id}`,
         type: 'PUT',
         dataType: "json",
         data: datad,

@@ -23,7 +23,7 @@ $(document).ready(function () {
         let output = '';
         $.ajax({
             type: 'GET',
-            url: `http://localhost:8000/api/projects/${id}/`,
+            url: `https://django-apii.herokuapp.com/api/projects/${id}/`,
             success: function (res) {
 
                 output += `<tr>
@@ -31,7 +31,7 @@ $(document).ready(function () {
                     
                     <td>${res['name']}</td>
 
-                       <td><img src="http://localhost:8000${res['image']}" class="img-fluid" height=100px width=100px /></td>
+                       <td><img src="${res['image']}" class="img-fluid" height=100px width=100px /></td>
                        <td>${res['description']}</td>
                        <td><input type='button' value='🗑️' data-pid="${res['project_id']}" class="pbtndelete" />
                       <input type='button' value='Edit' data-pid="${res['project_id']}" id="btaccess" data-bs-target="#Mymodel1" onclick="fun()" data-bs-toggle="modal" data-status= class="pbtnedit" />
@@ -51,7 +51,7 @@ $(document).ready(function () {
         console.log(s);
 
         $.ajax({
-            url: `http://localhost:8000/api/projects/${s}/`,
+            url: `https://django-apii.herokuapp.com/api/projects/${s}/`,
             type: "DELETE",
             success: function (res) {
                 alert("delete");
@@ -82,7 +82,7 @@ function myfun1() {
 
 
     $.ajax({
-        url: `http://localhost:8000/api/projects/${id}/`,
+        url: `https://django-apii.herokuapp.com/api/projects/${id}/`,
         type: 'PUT',
         data: formData,
         cache: false,
@@ -104,7 +104,7 @@ function fun() {
     let output = "";
     $.ajax({
         type: 'GET',
-        url: `http://localhost:8000/api/projects/${id}`,
+        url: `https://django-apii.herokuapp.com/api/projects/${id}`,
         success: function (res) {
             console.log(res);
             output += `
