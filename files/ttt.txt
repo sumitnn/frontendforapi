@@ -1,0 +1,149 @@
+                        if (value.status == 'C') {
+                            output += `<tr><th scope="row">${index + 1}</th><td>${value.title}</td>
+                       <td></td><td>${value.priority}</td><td><input type='button' value='🗑️' data-sid="${value.id}" class="btndelete" />
+                      <input type='button' value='' data-sid="${value.id}" data-status="${value.status}" class="btnedit" />
+                      </td></tr>`;
+                        } else {
+                            output += `<tr><th scope="row">${index + 1}</th><td>${value.title}</td>
+                       <td>⏲️</td><td>${value.priority}</td><td><input type='button' value='🗑️' data-sid="${value.id}" class="btndelete" />
+                      <input type='button' value='✅' data-sid="${value.id}" data-status="${value.status}" class="btnedit" />
+                      </td></tr>`;
+
+
+                     
+
+                      
+                    <div class="col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                    card's
+                                    content.</p>
+                                <div class="card-text">
+                                    <form>
+                                        <button class="btn btn-outline-info ">Edit </button>
+                                        <button class="btn btn-outline-danger">Delete</button>
+
+                                    </form>
+                                </div>
+                                <div class="mt-3">
+                                    <a href="" class="card-link text-center">More Details...</a>
+                                </div></div></div></div>
+
+
+
+
+
+
+
+                    //////////////////////////////////////
+
+                    
+$(document).ready(function () {
+    let output = '';
+    //call loadtodo
+    loadtodo();
+    //add new todo
+    $("#addtodoform").on("submit", function (e) {
+        e.preventDefault();
+        let token = $('input[name="csrfmiddlewaretoken"]').val();
+        let t = $("#title").val();
+        let s = $("#status").val();
+        let p = $("#priority").val();
+        $.ajax({
+            url: "{% url 'home' %}",
+            type: 'post',
+            data: {
+                csrfmiddlewaretoken: token,
+                title: t,
+                status: s,
+                priority: p,
+            },
+            success: function (res) {
+                if (res.status == 1) {
+                    console.log("1");
+                    //call loadtodo 
+                    loadtodo();
+                    $("#addtodoform")[0].reset();
+
+                }
+                else {
+                    console.log("0");
+                }
+            }
+        });
+    });
+
+    //get ajax todo list
+    function loadtodo() {
+        output = '';
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:8000/api/projects/",
+            success: function (res) {
+                console.log(res.data);
+                console.log(res);
+            }
+        });
+        $("#tbody").html(output);
+    }
+}
+    
+
+
+
+
+//delete todo
+$("#tbody").on('click', '.btndelete', function () {
+
+    let token = $('input[name="csrfmiddlewaretoken"]').val();
+    let s = $(this).attr('data-sid');
+
+    $.ajax({
+        url: "{% url 'deletetodo' %}",
+        type: "post",
+        data: {
+            csrfmiddlewaretoken: token,
+            sid: s
+        },
+        success: function (res) {
+
+            loadtodo();
+        }
+    });
+
+});
+
+//change status
+$("#tbody").on('click', '.btnedit', function () {
+
+    let token = $('input[name="csrfmiddlewaretoken"]').val();
+    let s = $(this).attr('data-sid');
+    let status = $(this).attr('data-status');
+
+    $.ajax({
+        url: "{% url 'changetodo' %}",
+        type: "post",
+        data: {
+            csrfmiddlewaretoken: token,
+            sid: s,
+            sst: status
+        },
+        success: function (res) {
+
+            loadtodo();
+        }
+    });
+
+});
+
+
+
+});
+
+
+<input type='button'    value='Delete'  data-pid="${value.project_id}" id="pbtndelete" class="btn btn-outline-danger" />
+                    <input type='button' value='Edit' data-pid="${value.project_id}" id="pbtnedit" class=" btn btn-outline-info" /></div>
+                    
